@@ -71,4 +71,28 @@ void main() {
       expect(item.hasSameConfiguration(differentSugar), isFalse);
     });
   });
+
+  test('toOrderJson returns the expected create_order item format', () {
+    final item = CartItem(
+      productId: 'test-product-id',
+      productName: 'Test Coffee',
+      basePrice: 5000,
+      selectedSize: 'Medium',
+      sizePriceDelta: 1000,
+      sugarLevel: 'Regular',
+      selectedAddOns: const [
+        CartAddOn(name: 'Caramel', price: 500),
+        CartAddOn(name: 'Extra Shot', price: 1000),
+      ],
+      quantity: 2,
+    );
+
+    expect(item.toOrderJson(), {
+      'product_id': 'test-product-id',
+      'quantity': 2,
+      'selected_size': 'Medium',
+      'sugar_level': 'Regular',
+      'selected_add_ons': ['Caramel', 'Extra Shot'],
+    });
+  });
 }

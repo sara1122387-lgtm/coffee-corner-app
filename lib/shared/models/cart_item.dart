@@ -39,6 +39,16 @@ class CartItem {
 
   int get totalPrice => unitPrice * quantity;
 
+  Map<String, dynamic> toOrderJson() {
+    return {
+      'product_id': productId,
+      'quantity': quantity,
+      'selected_size': selectedSize,
+      'sugar_level': sugarLevel,
+      'selected_add_ons': selectedAddOns.map((addOn) => addOn.name).toList(),
+    };
+  }
+
   CartItem copyWith({int? quantity}) {
     return CartItem(
       productId: productId,
